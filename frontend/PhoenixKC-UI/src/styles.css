@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+@theme {
+    --color-primary: #8f0101;
+    --color-secondary: #000000;
+    --color-thirdary: #ffffff;
+
+    --font-family-title: 'Acme', sans-serif;
+    --font-family-main-text: 'Signica', sans-serif;
+}

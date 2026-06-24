@@ -1,0 +1,6 @@
+@PhoenixKC.WebAPI_HostAddress = http://localhost:5045
+
+GET {{PhoenixKC.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
