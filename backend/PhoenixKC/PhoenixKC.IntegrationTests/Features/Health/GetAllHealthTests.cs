@@ -12,7 +12,7 @@ namespace PhoenixKC.IntegrationTests.Features.Health;
 public sealed class GetAllHealthTests(PhoenixWebApplicationFactory factory) : IClassFixture<PhoenixWebApplicationFactory>
 {
     private HttpClient HttpClient { get; } = factory.CreateClient();
-    private PhoenixDbContext DbContext { get; } = factory.Services.GetRequiredService<PhoenixDbContext>();
+    private PhoenixDbContext DbContext { get; } = factory.Server.Services.GetRequiredService<PhoenixDbContext>();
 
     [Fact]
     public async Task GetAllHealth_ShouldSucceded_WhenHealthIsEmpty()
