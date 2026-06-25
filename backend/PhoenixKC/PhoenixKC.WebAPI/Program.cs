@@ -49,3 +49,5 @@ app.UseSerilogRequestLogging();
 app.MapEndpointsFromAssembly();
 app.UseHttpsRedirection();
 app.Run();
+
+public partial class Program;
