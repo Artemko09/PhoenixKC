@@ -36,7 +36,7 @@ jobs:
         run: |
           dotnet tool install --global dotnet-sonarscanner
 
-      - name: Build and analyze
+      - name: Build, Analize, Testing
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

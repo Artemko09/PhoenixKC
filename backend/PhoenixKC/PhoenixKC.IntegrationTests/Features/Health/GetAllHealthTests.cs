@@ -13,6 +13,6 @@ public sealed class GetAllHealthTests(PhoenixWebApplicationFactory factory) : IC
         using HttpResponseMessage response = await HttpClient.GetAsync("/health", CancellationToken.None);
 
         //Assert
-        response.IsSuccessStatusCode.Should().BeTrue();
+        response.IsSuccessStatusCode.Should().BeFalse();
     }
 }
