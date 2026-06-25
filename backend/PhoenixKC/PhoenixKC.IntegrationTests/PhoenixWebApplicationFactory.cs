@@ -1,5 +1,7 @@
-﻿using Testcontainers.MsSql;
+﻿using Respawn;
+using Testcontainers.MsSql;
 using PhoenixKC.Infrastructure;
+using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -15,10 +17,27 @@ public sealed class PhoenixWebApplicationFactory : WebApplicationFactory<Program
     {
         get => field ??= Container.GetConnectionString();
     }
+    private SqlConnection SqlConnection
+    {
+        get => field ??= new SqlConnection(ConnectionString);
+    }
+    private Respawner Respawner
+    {
+        get => field ??= Respawner.CreateAsync(SqlConnection, new RespawnerOptions()
+        {
+            DbAdapter = DbAdapter.SqlServer,
+            TablesToIgnore = ["__EFMigrationsHistory"]
+        }).GetAwaiter().GetResult();
+    }
 
     public PhoenixWebApplicationFactory()
     {
         Container = new MsSqlBuilder("mcr.microsoft.com/mssql/server:2022-latest").WithPassword("Password123!").Build();
+    }
+
+    public async ValueTask ResetDatabase()
+    {
+        await Respawner.ResetAsync(SqlConnection);
     }
     #endregion
 
