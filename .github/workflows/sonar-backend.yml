@@ -43,5 +43,5 @@ jobs:
         # Переходимо в папку backend перед запуском команд за допомогою "working-directory"
         run: |
           dotnet-sonarscanner begin /k:"Artemko09_PhoenixKC" /o:"artemko09" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build backend/MyProject.slnx --configuration Release
+          dotnet build backend/PhoenixKC.slnx --configuration Debug
           dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
