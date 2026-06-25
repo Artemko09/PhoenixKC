@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Signica:wght@300..700&display=swap');
 @import 'tailwindcss';
 
 @theme {
     --color-primary: #8f0101;
-    --color-secondary: #000000;
+    --color-secondary: #202020;
     --color-thirdary: #ffffff;
 
-    --font-family-title: 'Acme', sans-serif;
-    --font-family-main-text: 'Signica', sans-serif;
+    --font-title: 'Acme', sans-serif;
+    --font-main-text: 'Signica', sans-serif;
 }
