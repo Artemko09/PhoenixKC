@@ -48,6 +48,4 @@ using(IServiceScope scope = app.Services.CreateScope())
 app.UseSerilogRequestLogging();
 app.MapEndpointsFromAssembly();
 app.UseHttpsRedirection();
-app.Run();
-
-public partial class Program;
+await app.RunAsync();

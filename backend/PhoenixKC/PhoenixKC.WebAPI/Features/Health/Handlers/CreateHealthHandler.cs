@@ -9,7 +9,7 @@ public sealed class CreateHealthHandler(PhoenixDbContext thisDbContext) : IReque
     #region IRequestHandler
     public async ValueTask<Result> Handle(CreateHealthCommand request, CancellationToken cancellationToken)
     {
-        request.Health.Id = default;
+        request.Health.Id = Guid.Empty;
         await thisDbContext.Health.AddAsync(request.Health.ToEntity(), cancellationToken);
         if(await thisDbContext.SaveChangesAsync(cancellationToken) == 0)
         {
