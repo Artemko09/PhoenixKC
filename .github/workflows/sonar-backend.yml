@@ -6,7 +6,7 @@ on:
       - main
       - dev
     paths:
-      - 'backend/**' # Запускати тільки якщо зміни в папці бекенду
+      - 'backend/**'
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
@@ -30,7 +30,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '10.0.x' # Вкажіть вашу версію .NET
+          dotnet-version: '10.0.x'
 
       - name: Install SonarCloud scanner
         run: |
@@ -40,8 +40,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        # Переходимо в папку backend перед запуском команд за допомогою "working-directory"
         run: |
           dotnet-sonarscanner begin /k:"Artemko09_PhoenixKC" /o:"artemko09" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build backend/PhoenixKC/PhoenixKC.slnx --configuration Debug
+          dotnet restore backend/PhoenixKC/PhoenixKC.slnx
+          dotnet build backend/PhoenixKC/PhoenixKC.slnx --configuration Debug --no-restore
+          dotnet test backend/PhoenixKC/PhoenixKC.slnx --configuration Debug --no-build --verbosity normal
           dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
