@@ -9,10 +9,9 @@ using PhoenixKC.Infrastructure.Features.Health;
 
 namespace PhoenixKC.IntegrationTests.Features.Health;
 
-public sealed class GetAllHealthTests(PhoenixWebApplicationFactory factory) : IClassFixture<PhoenixWebApplicationFactory>
+public sealed class GetAllHealthTests(PhoenixWebApplicationFactory thisFactory) : IClassFixture<PhoenixWebApplicationFactory>
 {
-    private HttpClient HttpClient { get; } = factory.CreateClient();
-    private PhoenixDbContext DbContext { get; } = factory.Server.Services.GetRequiredService<PhoenixDbContext>();
+    private HttpClient HttpClient { get; } = thisFactory.CreateClient();
 
     [Fact]
     public async Task GetAllHealth_ShouldSucceded_WhenHealthIsEmpty()
@@ -22,8 +21,12 @@ public sealed class GetAllHealthTests(PhoenixWebApplicationFactory factory) : IC
         {
             Name = "TestHealth"
         };
-        await DbContext.Health.AddAsync(entity, CancellationToken.None);
-        await DbContext.SaveChangesAsync(CancellationToken.None);
+        using(IServiceScope scope = thisFactory.Services.CreateScope())
+        {
+            PhoenixDbContext db_context = scope.ServiceProvider.GetRequiredService<PhoenixDbContext>();
+            await db_context.Health.AddAsync(entity, CancellationToken.None);
+            await db_context.SaveChangesAsync(CancellationToken.None);
+        }
         HealthDto dto = entity.ToDto();
 
         //Act
