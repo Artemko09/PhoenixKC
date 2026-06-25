@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Acme&family=Signica:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signica:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&display=swap');
 @import 'tailwindcss';
 
 @theme {
@@ -6,6 +8,7 @@
     --color-secondary: #202020;
     --color-thirdary: #ffffff;
 
-    --font-title: 'Acme', sans-serif;
+    --font-title: 'Unbounded', sans-serif;
+    --font-subtitle: 'Acme', sans-serif;
     --font-main-text: 'Signica', sans-serif;
 }
