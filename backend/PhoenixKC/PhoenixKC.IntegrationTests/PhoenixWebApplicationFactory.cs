@@ -11,12 +11,14 @@ public sealed class PhoenixWebApplicationFactory : WebApplicationFactory<Program
 {
     #region Instance
     private MsSqlContainer Container { get; }
-    private string ConnectionString { get; }
+    private string ConnectionString
+    {
+        get => field ??= Container.GetConnectionString();
+    }
 
     public PhoenixWebApplicationFactory()
     {
         Container = new MsSqlBuilder("mcr.microsoft.com/mssql/server:2022-latest").WithPassword("Password123!").Build();
-        ConnectionString = Container.GetConnectionString();
     }
     #endregion
 
