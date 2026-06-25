@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="PhoenixKC.Infrastructure/PhoenixKC.Infrastructure.csproj" Id="961a1bda-023d-475f-832f-314583f5b325" />
   <Project Path="PhoenixKC.WebAPI/PhoenixKC.WebAPI.csproj" Id="1b324d1e-ad98-4dba-8b4c-d8fd078f6736" />
 </Solution>
