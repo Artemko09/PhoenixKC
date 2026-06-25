@@ -19,7 +19,15 @@ public sealed class PhoenixWebApplicationFactory : WebApplicationFactory<Program
     }
     private SqlConnection SqlConnection
     {
-        get => field ??= new SqlConnection(ConnectionString);
+        get
+        {
+            if(field is null)
+            {
+                field = new SqlConnection(ConnectionString);
+                field.Open();
+            }
+            return field;
+        }
     }
     private Respawner Respawner
     {
