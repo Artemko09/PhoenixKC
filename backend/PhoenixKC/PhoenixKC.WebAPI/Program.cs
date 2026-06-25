@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PhoenixDbContext>(options =>
 {
     string? connection_str = builder.Configuration.GetConnectionString("DefaultConnection");
-    ArgumentNullException.ThrowIfNull(connection_str, nameof(connection_str));
+    ArgumentNullException.ThrowIfNull(connection_str);
     options.UseSqlServer(connection_str, builder =>
     {
         builder.MigrationsAssembly(typeof(PhoenixDbContext).Assembly.GetName().Name);
