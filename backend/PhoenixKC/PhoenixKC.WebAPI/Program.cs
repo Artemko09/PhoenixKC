@@ -3,8 +3,10 @@ using FluentValidation;
 using PhoenixKC.Infrastructure;
 using PhoenixKC.WebAPI.Behaviors;
 using PhoenixKC.WebAPI.Extensions;
+using PhoenixKC.WebAPI.Middleware;
 using Microsoft.EntityFrameworkCore;
 
+ValidatorOptions.Global.LanguageManager.Enabled = false;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog(static void(HostBuilderContext ctx, IServiceProvider provider, LoggerConfiguration cfg) =>
 {
@@ -14,6 +16,8 @@ builder.Services.AddMvcCore();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 builder.Services.AddDbContext<PhoenixDbContext>(options =>
 {
     if(builder.Configuration.GetConnectionString("DefaultConnection") is not string connection_str)
@@ -46,6 +50,7 @@ using(IServiceScope scope = app.Services.CreateScope())
     Console.WriteLine("Migrations applied");
 }
 app.UseSerilogRequestLogging();
+app.UseExceptionHandler();
 app.MapEndpointsFromAssembly();
 app.UseHttpsRedirection();
 app.Run();

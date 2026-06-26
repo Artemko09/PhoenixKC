@@ -5,7 +5,7 @@ namespace PhoenixKC.WebAPI.Extensions;
 
 public static class ActionResultExtensions
 {
-    public static IResult ToMinimalApiResult(this IActionResult actionResult)
+    public static IResult ToMvcResult(this IActionResult actionResult)
     {
         return new ActionResultAdapter(actionResult);
     }
