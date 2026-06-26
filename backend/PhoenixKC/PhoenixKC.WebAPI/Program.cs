@@ -16,10 +16,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PhoenixDbContext>(options =>
 {
-    if(builder.Configuration.GetConnectionString("DefaultConnection") is not string connection_str)
-    {
-        throw new NullReferenceException("Connection string not found");
-    }
+    string? connection_str = builder.Configuration.GetConnectionString("DefaultConnection");
+    ArgumentNullException.ThrowIfNull(connection_str);
     options.UseSqlServer(connection_str, builder =>
     {
         builder.MigrationsAssembly(typeof(PhoenixDbContext).Assembly.GetName().Name);
@@ -48,4 +46,4 @@ using(IServiceScope scope = app.Services.CreateScope())
 app.UseSerilogRequestLogging();
 app.MapEndpointsFromAssembly();
 app.UseHttpsRedirection();
-app.Run();
+await app.RunAsync();

@@ -10,16 +10,16 @@ public sealed class ValidationBehavior<TRequest, TResponse>(
 {
     #region IPipelineBehavior
     public async ValueTask<TResponse> Handle(
-        TRequest request,
+        TRequest message,
         MessageHandlerDelegate<TRequest, TResponse> next,
         CancellationToken cancellationToken
     )
     {
         if(!thisValidators.Any())
         {
-            return await next(request, cancellationToken);
+            return await next(message, cancellationToken);
         }
-        ValidationContext<TRequest> context = new(request);
+        ValidationContext<TRequest> context = new(message);
         ValidationResult[] results = await Task.WhenAll(
             thisValidators.Select(v => v.ValidateAsync(context, cancellationToken))
         );
@@ -28,7 +28,7 @@ public sealed class ValidationBehavior<TRequest, TResponse>(
         {
             throw new ValidationException(failures);
         }
-        return await next(request, cancellationToken);
+        return await next(message, cancellationToken);
     }
     #endregion
 }
