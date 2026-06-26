@@ -20,10 +20,8 @@ builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 builder.Services.AddDbContext<PhoenixDbContext>(options =>
 {
-    if(builder.Configuration.GetConnectionString("DefaultConnection") is not string connection_str)
-    {
-        throw new NullReferenceException("Connection string not found");
-    }
+    string? connection_str = builder.Configuration.GetConnectionString("DefaultConnection");
+    ArgumentNullException.ThrowIfNull(connection_str);
     options.UseSqlServer(connection_str, builder =>
     {
         builder.MigrationsAssembly(typeof(PhoenixDbContext).Assembly.GetName().Name);
@@ -53,4 +51,4 @@ app.UseSerilogRequestLogging();
 app.UseExceptionHandler();
 app.MapEndpointsFromAssembly();
 app.UseHttpsRedirection();
-app.Run();
+await app.RunAsync();
