@@ -17,7 +17,7 @@ public sealed class HealthEndpoints : IEndpointsProvider
     )
     {
         Result<IEnumerable<HealthDto>> result = await mediator.Send(new GetAllHealthQuery(), cancellationToken);
-        return result.ToActionResult().ToMinimalApiResult();
+        return result.ToActionResult().ToMvcResult();
     }
     public static async Task<IResult> GetHealth(
         [FromRoute] Guid id, 
@@ -26,7 +26,7 @@ public sealed class HealthEndpoints : IEndpointsProvider
     )
     {
         Result<HealthDto> result = await mediator.Send(new GetHealthQuery(id), cancellationToken);
-        return result.ToActionResult().ToMinimalApiResult();
+        return result.ToActionResult().ToMvcResult();
     }
     public static async Task<IResult> CreateHealth(
         [FromBody] HealthDto dto,
@@ -35,7 +35,7 @@ public sealed class HealthEndpoints : IEndpointsProvider
     )
     {
         Result result = await mediator.Send(new CreateHealthCommand(dto), cancellationToken);
-        return result.ToActionResult().ToMinimalApiResult();
+        return result.ToActionResult().ToMvcResult();
     }
     public static async Task<IResult> UpdateHealth(
         [FromBody] HealthDto dto,
@@ -44,7 +44,7 @@ public sealed class HealthEndpoints : IEndpointsProvider
     )
     {
         Result result = await mediator.Send(new UpdateHealthCommand(dto), cancellationToken);
-        return result.ToActionResult().ToMinimalApiResult();
+        return result.ToActionResult().ToMvcResult();
     }
     public static async Task<IResult> DeleteHealth(
         [FromRoute] Guid id,
@@ -53,7 +53,7 @@ public sealed class HealthEndpoints : IEndpointsProvider
     )
     {
         Result result = await mediator.Send(new DeleteHealthCommand(id), cancellationToken);
-        return result.ToActionResult().ToMinimalApiResult();
+        return result.ToActionResult().ToMvcResult();
     }
     #endregion
 
