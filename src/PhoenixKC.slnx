@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="PhoenixKC.Infrastructure/PhoenixKC.Infrastructure.csproj" />
+  <Project Path="PhoenixKC.IntegrationTests/PhoenixKC.IntegrationTests.csproj" />
+  <Project Path="PhoenixKC.UI/PhoenixKC.UI.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="PhoenixKC.UnitTests/PhoenixKC.UnitTests.csproj" />
+  <Project Path="PhoenixKC.WebAPI/PhoenixKC.WebAPI.csproj" />
+</Solution>
