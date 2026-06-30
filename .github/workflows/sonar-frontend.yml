@@ -6,11 +6,11 @@ on:
       - main
       - dev
     paths:
-      - 'src/PhoenixKC.UI'
+      - 'src/PhoenixKC.UI/**'
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
-      - 'src/PhoenixKC.UI'
+      - 'src/PhoenixKC.UI/**'
 
 jobs:
   sonar-frontend:
