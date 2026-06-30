@@ -6,11 +6,11 @@ on:
       - main
       - dev
     paths:
-      - 'frontend/**' # Запускати тільки якщо зміни в папці фронтенду
+      - 'src/PhoenixKC.UI/**'
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
-      - 'frontend/**'
+      - 'src/PhoenixKC.UI/**'
 
 jobs:
   sonar-frontend:
@@ -27,8 +27,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          # Вказуємо Sonar, що корінь аналізу — це папка frontend
-          projectBaseDir: frontend
+          projectBaseDir: src/PhoenixKC.UI
           args: >
             -Dsonar.projectKey=Artemko09_PhoenixKC
             -Dsonar.organization=artemko09
