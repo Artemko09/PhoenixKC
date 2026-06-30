@@ -3,13 +3,23 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "535ee963-3954-4881-a869-548ff27422df"
+    "analytics": "305b404d-1dc1-4cf6-ae32-b87b32bfd7b5"
   },
   "newProjectRoot": "projects",
   "projects": {
-    "PhoenixKC-UI": {
+    "PhoenixKC.UI": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -57,16 +67,22 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "PhoenixKC-UI:build:production"
+              "buildTarget": "PhoenixKC.UI:build:production"
             },
             "development": {
-              "buildTarget": "PhoenixKC-UI:build:development"
+              "buildTarget": "PhoenixKC.UI:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 59067
+          }
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "karmaConfig": "karma.conf.js"
+          }
         }
       }
     }
